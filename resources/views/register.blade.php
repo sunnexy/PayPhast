@@ -53,12 +53,27 @@
                             <div class="form-group col-sm-10 col-lg-4 col-md-6">
                                 <input type="text" placeholder="Name" name="name">
                             </div>
+                            @if ($errors->has('name'))
+                                <span class="help-block m-b-none small text-danger">
+                                <strong style="color: red;">{{ $errors->first('name') }}</strong>
+                            </span>
+                            @endif
                             <div class="form-group col-sm-10 col-lg-4 col-md-6">
                                 <input type="text" placeholder="Email" name="email">
                             </div>
+                            @if ($errors->has('email'))
+                                <span class="help-block m-b-none small text-danger">
+                                <strong style="color: red;">{{ $errors->first('email') }}</strong>
+                            </span>
+                            @endif
                             <div class="form-group col-sm-10 col-lg-4 col-md-6">
                                 <input type="password" name="password" placeholder="Password">
                             </div>
+                            @if ($errors->has('password'))
+                                <span class="help-block m-b-none small text-danger">
+                                <strong style="color: red;">{{ $errors->first('password') }}</strong>
+                            </span>
+                            @endif
                             <div class="form-group col-sm-10 col-lg-3 col-xl-4">
                                 <input type="submit" value="sign up">
                             </div>

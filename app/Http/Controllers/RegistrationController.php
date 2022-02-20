@@ -28,5 +28,6 @@ class RegistrationController extends Controller
          if($user){
             return redirect()->route('login');
          }
+         return redirect()->back()->with('errors', 'Incomplete details');
     }
 }

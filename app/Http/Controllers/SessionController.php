@@ -24,9 +24,8 @@ class SessionController extends Controller
         if(Auth::attempt($user)){
             return redirect()->route('index');
         }
-        return redirect("/login")->withErrors([
-            'errors' => 'Please check details and login again'
-        ]);
+        return redirect("/")->with('errors', 'Please check details and login again');
+       
     }
 
     public function logout()

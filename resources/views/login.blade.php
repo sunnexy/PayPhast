@@ -28,6 +28,7 @@
                     <a href="{{ URL('signup') }}"><li class="tab-out"><span>sign up</span></li></a>
                     <li class="active tab-in"><span>sign in</span></li>
                 </ul>
+                
                 <div class="tab-area">
                     <div class="tab-item">
                         <form class="row account-form justify-content-center">
@@ -72,6 +73,12 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
+                            @if (session('errors'))
+                            <div class="alert alert-danger" style="font-size: 18px;">
+                                <button class="close" style="width:50px;" type="button" data-dismiss="alert" aria-hidden="true"></button>
+                                {{ session('errors') }}
+                            </div>
+                            @endif
                                 <form class="row account-form sign-in-form" method="post" action="{{URL('login')}}">
                                 {{ csrf_field() }}
                                     <div class="form-group col-12">
