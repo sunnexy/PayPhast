@@ -51,8 +51,8 @@
                       </div>
                   </div>
                   <div class="form-group">
-                      <label for="">Amount USD</label>
-                      <input type="number" class="form-control" name="amount" placeholder="Amount ($)">
+                      <label for="">Amount</label>
+                      <input type="number" class="form-control" name="amount" placeholder="Amount from wallet">
                   </div><br>
                   <div class="mb-4">
                     <label class="form-label" for="crypto-buy-to">Select Currency</label>

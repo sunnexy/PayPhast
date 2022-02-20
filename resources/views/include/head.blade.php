@@ -33,4 +33,3 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
-
