@@ -20,7 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('amount');
             $table->string('source_currency');
             $table->string('target_currency');
-            $table->double('amount', 8, 2);
+            $table->double('exchange_rate', 8, 2);
             $table->string('status');
             $table->timestamps();
         });
