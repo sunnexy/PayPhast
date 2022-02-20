@@ -15,9 +15,17 @@ class TransactionController extends Controller
     public function transactions()
     {
         if(Auth::check()){
+            $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
+            $use_ssl = false; # Free plans are restricted to non-SSL only.
+            
+            $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
+            $rates  = $exapi->fetch();
+            $convertUSD = $rates->getrates()["USD"];
+            $convertEUR = $rates->getrates()["EUR"];
+            $convertGBP = $rates->getrates()["GBP"];
             $user = Auth::user();
             $transactions = Transaction::where('sender', $user->name)->orWhere('receiver', $user->name)->get();
-            return view('transactions', ['user' => $user, 'transactions' => $transactions]);
+            return view('transactions', ['convertUSD'=>$convertUSD, 'user' => $user, 'transactions' => $transactions]);
         }
         return view('login');
     }
