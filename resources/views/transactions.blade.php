@@ -74,8 +74,8 @@
                                 @else
                                 <td class="text-center"><b style="color:green; font-size:14px;">{{$transaction->status}}</b></td>
                                 @endif
-                                <td class="text-center">{{$transaction->created_at->format('F d, Y G:i')}}</td>
-                                <td class="text-center">{{$transaction->updated_at}}</td>
+                                <td class="text-center">{{$transaction->created_at->format('M d, Y G:i')}}</td>
+                                <td class="text-center">{{$transaction->updated_at->format('M d, Y G:i')}}</td>
                               </tr>
                             @endforeach
                             </tbody>
