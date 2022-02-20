@@ -47,14 +47,14 @@ class TransactionController extends Controller
             // $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
 
             // Initialize CURL:
-            $ch = curl_init('https://api.exchangerate-api.com/v4/latest/USD');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-            $json = curl_exec($ch);
-            curl_close($ch);
-
-            $exchangeRates = json_decode($json, true);
-            $convertEUR = $exchangeRates['rates']['EUR'];
+            $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
+            $use_ssl = false; # Free plans are restricted to non-SSL only.
+            
+            $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
+            $rates  = $exapi->fetch();
+            $convertUSD = $rates->getrates()["USD"];
+            $convertEUR = $rates->getrates()["EUR"];
+            $convertGBP = $rates->getrates()["GBP"];
 
             $user = Auth::user();
             $usdbalance = $user->usd_balance;
@@ -105,7 +105,7 @@ class TransactionController extends Controller
                 }elseif($currency == "EUR"){
                     if($amount <= $usdbalance){
                         $amountEUR = $convertEUR * $amount;
-                        
+
                         $bal = $usdbalance - $amount;
                         $receiver_eur = $receiver_bal->eur_balance;
                         $balance = $receiver_eur + $amountEUR;
@@ -171,14 +171,15 @@ class TransactionController extends Controller
                 $json = file_get_contents($url);
                 $exp = json_decode($json);
 
-                $convertUSD = $exp->rates->USD;
-                $convertEUR = $exp->rates->EUR;
-                $convertGBP = $exp->rates->GBP;
+                // $convertUSD = $exp->rates->USD;
+                // $convertEUR = $exp->rates->EUR;
+                // $convertGBP = $exp->rates->GBP;
 
                 $eurbalance = $user->eur_balance;
                 $receiver_bal = User::where('name', $receiver)->first();
                 if($currency == "USD"){
                     if($amount <= $eurbalance){
+
                         $amountUSD = $convertUSD * $amount;
                         $bal = $eurbalance - $amount;
     
