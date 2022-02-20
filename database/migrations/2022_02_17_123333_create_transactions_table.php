@@ -21,6 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->string('source_currency');
             $table->string('target_currency');
             $table->integer('exchange_rate');
+            $table->string('status');
             $table->timestamps();
         });
     }

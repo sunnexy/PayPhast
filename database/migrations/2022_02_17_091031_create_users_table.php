@@ -18,7 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('balance')->default(1000);
+            $table->integer('usd_balance')->default(1000);
+            $table->integer('eur_balance');
+            $table->integer('gbp_balance');
             $table->timestamps();
         });
     }
