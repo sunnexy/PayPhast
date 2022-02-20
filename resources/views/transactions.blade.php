@@ -44,12 +44,12 @@
                                 <th class="text-center" style="font-size: 12px; width: 5%;">ID</th>
                                 <th class="text-center" style="font-size: 12px; width: 15%;">From</th>
                                 <th class="text-center" style="font-size: 12px; width: 15%;">To</th>
-                                <th class="d-none d-sm-table-cell">Amount Sent</th>
-                                <th class="d-none d-sm-table-cell">Amount Received</th>
-                                <th class="d-none d-sm-table-cell">Exchange Rate</th>
-                                <th class="d-none d-sm-table-cell">Status</th>
-                                <th class="d-none d-sm-table-cell" style="font-size: 14px; width: 15%;">Created At</th>
-                                <th class="d-none d-sm-table-cell" style="font-size: 14px; width: 15%;">Updated At</th>
+                                <th class="text-center">Amount Sent</th>
+                                <th class="text-center">Amount Received</th>
+                                <th class="text-center">Exchange Rate</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center" style="font-size: 14px; width: 15%;">Created At</th>
+                                <th class="text-center" style="font-size: 14px; width: 15%;">Updated At</th>
                               </tr>
                             </thead>
                             <tbody>
