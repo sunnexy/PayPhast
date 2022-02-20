@@ -205,8 +205,9 @@ class TransactionController extends Controller
                         ]);
                         User::where('name', $receiver)->update(['usd_balance' => $balance]);
                         User::where('name', $sender)->update(['eur_balance' => $bal]);
-    
-                        return redirect('/transactions')->with('success', 'Money sent successfully');
+                        return redirect('/transacs');
+                        
+                        // return redirect('/transactions')->with('success', 'Money sent successfully');
                     }
                     $transaction = Transaction::create([
                         'source_currency' => $request->source,
@@ -391,5 +392,17 @@ class TransactionController extends Controller
             }
         }
         return view('login');
+    }
+    public function tran()
+    {
+        $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
+                $use_ssl = false; # Free plans are restricted to non-SSL only.
+                
+                $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
+                $rates  = $exapi->fetch();
+                $convertUSD = $rates->getrates()["USD"];
+                $convertEUR = $rates->getrates()["EUR"];
+                $convertGBP = $rates->getrates()["GBP"];
+        return view('transacs', ['convertUSD'=>$convertUSD]);
     }
 }
