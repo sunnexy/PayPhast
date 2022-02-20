@@ -69,7 +69,11 @@
                                 <td class="text-center">{{$transaction->amount}} {{$transaction->source_currency}}</td>
                                 <td class="text-center">{{$transaction->amount * $transaction->exchange_rate}} {{$transaction->target_currency}}</td>
                                 <td class="text-center">{{$transaction->exchange_rate}}</td>
+                                @if($transaction->status == 'failed')
                                 <td class="text-center"><i style="color:red; font-size:14px;">{{$transaction->status}}</i></td>
+                                @else
+                                <td class="text-center"><b style="color:green; font-size:14px;">{{$transaction->status}}</b></td>
+                                @endif
                                 <td class="text-center">{{$transaction->created_at}}</td>
                                 <td class="text-center">{{$transaction->updated_at}}</td>
                               </tr>
