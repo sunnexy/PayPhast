@@ -171,7 +171,7 @@ class TransactionController extends Controller
                 if($currency == "USD"){
                     if($amount <= $eurbalance){
 
-                        $amountUSD = 1.132 * $amount;
+                        $amountUSD = $convertUSD * $amount;
                         $bal = $eurbalance - $amount;
     
                         $receiver_usd = $receiver_bal->usd_balance; 
@@ -182,13 +182,13 @@ class TransactionController extends Controller
                             'receiver' => $receiver,
                             'amount' => $amount,
                             'target_currency' => $currency,
-                            'exchange_rate' => 1.132,
+                            'exchange_rate' => $convertUSD,
                             'status' => 'successful'
                         ]);
                         User::where('name', $receiver)->update(['usd_balance' => $balance]);
                         User::where('name', $sender)->update(['eur_balance' => $bal]);
                         
-                        // return redirect('/transactions')->with('success', 'Money sent successfully');
+                        return redirect('/transactions')->with('success', 'Money sent successfully');
                     }
                     $transaction = Transaction::create([
                         'source_currency' => $request->source,
@@ -196,7 +196,7 @@ class TransactionController extends Controller
                         'receiver' => $receiver,
                         'amount' => $amount,
                         'target_currency' => $currency,
-                        'exchange_rate' => 1.132,
+                        'exchange_rate' => $convertUSD,
                         'status' => 'failed'
                     ]);
                     return redirect()->back()->with('danger', 'Not enough funds!');
