@@ -14,7 +14,7 @@
     <!-- ============Header Section Starts Here================== -->
     <header class="header-section" style="background-color: blue; height: 120px; margin-top: -60px; margin-bottom: 30px;">
         <div class="container" style="font-size: 38px; margin-top: 40px; color: white; text-align: center;">
-            Send-Wise
+            PayPhast
         </div>
         <a href="{{URL('logout')}}" style="float:right;"><button style="width: 100px; margin-right:10px; font-size:18px; background-color:white;">Logout</button></a>
     </header>

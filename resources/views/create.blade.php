@@ -13,7 +13,7 @@
     <!-- ============Header Section Starts Here================== -->
     <header class="header-section" style="background-color: blue; height: 120px; margin-top: -60px; margin-bottom: 30px;">
         <div class="container" style="font-size: 38px; margin-top: 40px; color: white; text-align: center;">
-            Send-Wise
+            PayPhast
         </div>
     </header>
     <div style="margin-top: 130px; padding: 10px; border: 1px solid black;">
