@@ -215,7 +215,7 @@ class TransactionController extends Controller
                         'receiver' => $receiver,
                         'amount' => $amount,
                         'target_currency' => $currency,
-                        'exchange_rate' => $convertUSD,
+                        'exchange_rate' => 1.132,
                         'status' => 'failed'
                     ]);
                     return redirect()->back()->with('danger', 'Not enough funds!');
