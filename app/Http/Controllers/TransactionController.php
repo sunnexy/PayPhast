@@ -43,9 +43,9 @@ class TransactionController extends Controller
     public function transfer(Request $request)
     {
         if(Auth::check()){
-            $url = 'https://api.exchangerate-api.com/v4/latest/USD';
-            $json = file_get_contents($url);
-            $exp = json_decode($json);
+            // $url = 'https://api.exchangerate-api.com/v4/latest/USD';
+            // $json = file_get_contents($url);
+            // $exp = json_decode($json);
 
             // $convertUSD = $exp->rates->USD;
             // $convertEUR = $exp->rates->EUR;
@@ -55,14 +55,14 @@ class TransactionController extends Controller
             // $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
 
             // Initialize CURL:
-            $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
-            $use_ssl = false; # Free plans are restricted to non-SSL only.
+            // $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
+            // $use_ssl = false; # Free plans are restricted to non-SSL only.
             
-            $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
-            $rates  = $exapi->fetch();
-            $convertUSD = $rates->getrates()["USD"];
-            $convertEUR = $rates->getrates()["EUR"];
-            $convertGBP = $rates->getrates()["GBP"];
+            // $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
+            // $rates  = $exapi->fetch();
+            // $convertUSD = $rates->getrates()["USD"];
+            // $convertEUR = $rates->getrates()["EUR"];
+            // $convertGBP = $rates->getrates()["GBP"];
 
             $user = Auth::user();
             $usdbalance = $user->usd_balance;
@@ -189,7 +189,7 @@ class TransactionController extends Controller
                 if($currency == "USD"){
                     if($amount <= $eurbalance){
 
-                        $amountUSD = $convertUSD * $amount;
+                        $amountUSD = 1.132 * $amount;
                         $bal = $eurbalance - $amount;
     
                         $receiver_usd = $receiver_bal->usd_balance; 
@@ -200,12 +200,11 @@ class TransactionController extends Controller
                             'receiver' => $receiver,
                             'amount' => $amount,
                             'target_currency' => $currency,
-                            'exchange_rate' => $convertUSD,
+                            'exchange_rate' => 1.132,
                             'status' => 'successful'
                         ]);
                         User::where('name', $receiver)->update(['usd_balance' => $balance]);
                         User::where('name', $sender)->update(['eur_balance' => $bal]);
-                        return redirect('/transacs');
                         
                         // return redirect('/transactions')->with('success', 'Money sent successfully');
                     }
@@ -392,17 +391,5 @@ class TransactionController extends Controller
             }
         }
         return view('login');
-    }
-    public function tran()
-    {
-        $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
-                $use_ssl = false; # Free plans are restricted to non-SSL only.
-                
-                $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
-                $rates  = $exapi->fetch();
-                $convertUSD = $rates->getrates()["USD"];
-                $convertEUR = $rates->getrates()["EUR"];
-                $convertGBP = $rates->getrates()["GBP"];
-        return view('transacs', ['convertUSD'=>$convertUSD]);
     }
 }

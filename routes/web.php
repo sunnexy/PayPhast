@@ -21,6 +21,5 @@ Route::get('/signup', 'RegistrationController@createUser');
 Route::post('/register', 'RegistrationController@register');
 
 Route::get('/transactions', 'TransactionController@transactions')->name('index');
-Route::get('/transacs', 'TransactionController@tran');
 Route::get('/create', 'TransactionController@create');
 Route::post('/transfer', 'TransactionController@transfer');
