@@ -175,13 +175,14 @@ class TransactionController extends Controller
                     return redirect()->back()->with('danger', 'Not enough funds!');
                 }
             }elseif($source == "EUR"){
-                $url = 'https://api.exchangerate-api.com/v4/latest/EUR';
-                $json = file_get_contents($url);
-                $exp = json_decode($json);
-
-                // $convertUSD = $exp->rates->USD;
-                // $convertEUR = $exp->rates->EUR;
-                // $convertGBP = $exp->rates->GBP;
+                $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
+                $use_ssl = false; # Free plans are restricted to non-SSL only.
+                
+                $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
+                $rates  = $exapi->fetch();
+                $convertUSD = $rates->getrates()["USD"];
+                $convertEUR = $rates->getrates()["EUR"];
+                $convertGBP = $rates->getrates()["GBP"];
 
                 $eurbalance = $user->eur_balance;
                 $receiver_bal = User::where('name', $receiver)->first();
