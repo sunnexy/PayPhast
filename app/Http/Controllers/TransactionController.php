@@ -15,17 +15,10 @@ class TransactionController extends Controller
     public function transactions()
     {
         if(Auth::check()){
-            $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
-            $use_ssl = false; # Free plans are restricted to non-SSL only.
             
-            $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
-            $rates  = $exapi->fetch();
-            $convertUSD = $rates->getrates()["USD"];
-            $convertEUR = $rates->getrates()["EUR"];
-            $convertGBP = $rates->getrates()["GBP"];
             $user = Auth::user();
             $transactions = Transaction::where('sender', $user->name)->orWhere('receiver', $user->name)->get();
-            return view('transactions', ['convertUSD'=>$convertUSD, 'user' => $user, 'transactions' => $transactions]);
+            return view('transactions', ['user' => $user, 'transactions' => $transactions]);
         }
         return view('login');
     }
@@ -44,18 +37,13 @@ class TransactionController extends Controller
     {
         if(Auth::check()){
 
-            // $endpoint = 'USD';
-            // $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
+            $url = 'https://api.exchangerate-api.com/v4/latest/USD';
+            $json = file_get_contents($url);
+            $exp = json_decode($json);
 
-            // Initialize CURL:
-            // $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
-            // $use_ssl = false; # Free plans are restricted to non-SSL only.
-            
-            // $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
-            // $rates  = $exapi->fetch();
-            // $convertUSD = $rates->getrates()["USD"];
-            // $convertEUR = $rates->getrates()["EUR"];
-            // $convertGBP = $rates->getrates()["GBP"];
+            $convertUSD = $exp->rates->USD;
+            $convertEUR = $exp->rates->EUR;
+            $convertGBP = $exp->rates->GBP;
 
             $user = Auth::user();
             $usdbalance = $user->usd_balance;
@@ -73,14 +61,6 @@ class TransactionController extends Controller
 
             $receiver_bal = User::where('name', $receiver)->first();
             if($source == "USD"){
-                $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
-                $use_ssl = false; # Free plans are restricted to non-SSL only.
-                
-                $exapi = new ExchangeRatesAPI($access_key, $use_ssl);
-                $rates  = $exapi->fetch();
-                $convertUSD = $rates->getrates()["USD"];
-                $convertEUR = $rates->getrates()["EUR"];
-                $convertGBP = $rates->getrates()["GBP"];
                 if($currency == "USD"){
                     if($amount <= $usdbalance){
                         $bal = $usdbalance - $amount;
@@ -113,7 +93,7 @@ class TransactionController extends Controller
                     return redirect()->back()->with('danger', 'Not enough funds!');
                 }elseif($currency == "EUR"){
                     if($amount <= $usdbalance){
-                        $amountEUR = 0.88 * $amount;
+                        $amountEUR = $convertEUR * $amount;
 
                         $bal = $usdbalance - $amount;
                         $receiver_eur = $receiver_bal->eur_balance;
@@ -124,7 +104,7 @@ class TransactionController extends Controller
                             'receiver' => $receiver,
                             'amount' => $amount,
                             'target_currency' => $currency,
-                            'exchange_rate' => 0.88,
+                            'exchange_rate' => $convertEUR,
                             'status' => 'successful'
                         ]);
                         User::where('name', $receiver)->update(['eur_balance' => $balance]);
