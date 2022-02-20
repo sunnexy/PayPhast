@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Str;
 
-$DATABASE_URL=parse_url('DATABASE_URL');
-
 return [
 
     /*
@@ -48,11 +46,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => $DATABASE_URL('host'),
-            'port' => $DATABASE_URL('host'),
-            'database' => ltrim($DATABASE_URL["path"], "/"),
-            'username' => $DATABASE_URL('user'),
-            'password' => $DATABASE_URL('pass'),
+            'host' => env('DB_HOST', 'us-cdbr-east-05.cleardb.net'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'payphast'),
+            'username' => env('DB_USERNAME', 'b9bed5026df8bd'),
+            'password' => env('DB_PASSWORD', 'ba6a1390'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
