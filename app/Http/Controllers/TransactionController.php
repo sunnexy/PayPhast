@@ -89,7 +89,7 @@ class TransactionController extends Controller
                 }elseif($currency == "EUR"){
                     if($amount <= $usdbalance){
                         $amountEUR = $convertEUR * $amount;
-    
+                        dd($convertEUR);
                         $bal = $usdbalance - $amount;
                         $receiver_eur = $receiver_bal->eur_balance;
                         $balance = $receiver_eur + $amountEUR;
