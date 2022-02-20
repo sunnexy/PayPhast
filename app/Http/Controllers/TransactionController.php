@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Transaction;
+use \BenMajor\ExchangeRatesAPI\ExchangeRatesAPI;
+use \BenMajor\ExchangeRatesAPI\Response;
+use \BenMajor\ExchangeRatesAPI\Exception;
 
 class TransactionController extends Controller
 {
@@ -36,9 +39,22 @@ class TransactionController extends Controller
             $json = file_get_contents($url);
             $exp = json_decode($json);
 
-            $convertUSD = $exp->rates->USD;
-            $convertEUR = $exp->rates->EUR;
-            $convertGBP = $exp->rates->GBP;
+            // $convertUSD = $exp->rates->USD;
+            // $convertEUR = $exp->rates->EUR;
+            // $convertGBP = $exp->rates->GBP;
+
+            // $endpoint = 'USD';
+            // $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
+
+            // Initialize CURL:
+            $ch = curl_init('https://api.exchangerate-api.com/v4/latest/USD');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $json = curl_exec($ch);
+            curl_close($ch);
+
+            $exchangeRates = json_decode($json, true);
+            $convertEUR = $exchangeRates['rates']['EUR'];
 
             $user = Auth::user();
             $usdbalance = $user->usd_balance;
@@ -89,7 +105,7 @@ class TransactionController extends Controller
                 }elseif($currency == "EUR"){
                     if($amount <= $usdbalance){
                         $amountEUR = $convertEUR * $amount;
-                        dd($convertEUR);
+                        
                         $bal = $usdbalance - $amount;
                         $receiver_eur = $receiver_bal->eur_balance;
                         $balance = $receiver_eur + $amountEUR;

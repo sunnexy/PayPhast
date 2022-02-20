@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c61ff82cbf0142a401a48a8161e1595a",
+    "content-hash": "44b60b6816c79ae17e264d0b567a6206",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,47 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.1.1"
             },
             "time": "2022-01-18T09:12:03+00:00"
+        },
+        {
+            "name": "benmajor/exchange-rates-api",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/benmajor/ExchangeRatesAPI.git",
+                "reference": "5684d918c51a425f12ef32cefd69157acfdaa5e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/benmajor/ExchangeRatesAPI/zipball/5684d918c51a425f12ef32cefd69157acfdaa5e1",
+                "reference": "5684d918c51a425f12ef32cefd69157acfdaa5e1",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3 || ^7.0",
+                "php": ">= 7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BenMajor\\ExchangeRatesAPI\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Major",
+                    "email": "ben.major88@gmail.com"
+                }
+            ],
+            "description": "An unofficial SDK for the ExchangeRatesAPI. (https://exchangeratesapi.io/)",
+            "support": {
+                "issues": "https://github.com/benmajor/ExchangeRatesAPI/issues",
+                "source": "https://github.com/benmajor/ExchangeRatesAPI/tree/3.1.0"
+            },
+            "time": "2022-02-11T09:29:50+00:00"
         },
         {
             "name": "brick/math",
