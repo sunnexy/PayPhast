@@ -43,13 +43,6 @@ class TransactionController extends Controller
     public function transfer(Request $request)
     {
         if(Auth::check()){
-            // $url = 'https://api.exchangerate-api.com/v4/latest/USD';
-            // $json = file_get_contents($url);
-            // $exp = json_decode($json);
-
-            // $convertUSD = $exp->rates->USD;
-            // $convertEUR = $exp->rates->EUR;
-            // $convertGBP = $exp->rates->GBP;
 
             // $endpoint = 'USD';
             // $access_key = 'f55a0cc91e5cfc4e8b695f41b5ec9d2d';
