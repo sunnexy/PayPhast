@@ -184,6 +184,7 @@ class TransactionController extends Controller
                 $convertEUR = $rates->getrates()["EUR"];
                 $convertGBP = $rates->getrates()["GBP"];
 
+                $user = Auth::user();
                 $eurbalance = $user->eur_balance;
                 $receiver_bal = User::where('name', $receiver)->first();
                 if($currency == "USD"){
