@@ -55,11 +55,11 @@
                             <tbody>
                             @foreach($transactions as $transaction)
                               <tr>
-                                <td class="text-center">{{$transaction->id}}</td>
+                                <td class="text-center">{{$id++}}</td>
                                 @if($transaction->sender == $user->name)
                                 <td class="text-center">You</td>
                                 @else
-                                <td class="text-center">{{$id++}}</td>
+                                <td class="text-center">{{$transaction->sender}}</td>
                                 @endif
                                 @if($transaction->receiver == $user->name)
                                 <td class="text-center">You</td>
