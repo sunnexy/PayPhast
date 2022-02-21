@@ -59,7 +59,7 @@
                                 @if($transaction->sender == $user->name)
                                 <td class="text-center">You</td>
                                 @else
-                                <td class="text-center">{{$transaction->sender}}</td>
+                                <td class="text-center">{{$id++}}</td>
                                 @endif
                                 @if($transaction->receiver == $user->name)
                                 <td class="text-center">You</td>

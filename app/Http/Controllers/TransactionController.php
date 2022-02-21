@@ -18,7 +18,7 @@ class TransactionController extends Controller
             
             $user = Auth::user();
             $transactions = Transaction::where('sender', $user->name)->orWhere('receiver', $user->name)->get();
-            return view('transactions', ['user' => $user, 'transactions' => $transactions]);
+            return view('transactions', ['user' => $user, 'transactions' => $transactions])->with('id', 1);
         }
         return view('login');
     }
